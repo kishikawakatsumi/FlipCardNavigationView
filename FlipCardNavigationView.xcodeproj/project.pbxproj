@@ -71,12 +71,20 @@
 				14B4BD2C1145400100FCFA91 /* SecondViewController.m */,
 				14B4BE8511455B9600FCFA91 /* ThirdViewController.h */,
 				14B4BE8611455B9600FCFA91 /* ThirdViewController.m */,
+				14B4C1EE114597A100FCFA91 /* FlipCardView */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		14B4C1EE114597A100FCFA91 /* FlipCardView */ = {
+			isa = PBXGroup;
+			children = (
 				14B4BB7C11451DA300FCFA91 /* FlipCardView.h */,
 				14B4BB7D11451DA300FCFA91 /* FlipCardView.m */,
 				14B4BCEA11453C4700FCFA91 /* FlipCardThumbnailButton.h */,
 				14B4BCEB11453C4700FCFA91 /* FlipCardThumbnailButton.m */,
 			);
-			path = Classes;
+			name = FlipCardView;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
