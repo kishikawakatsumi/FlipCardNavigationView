@@ -10,6 +10,8 @@
 #import "FlipCardThumbnailButton.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define ANIMATION_DURATION 0.5
+
 @implementation FlipCardView
 
 @synthesize delegate;
@@ -178,7 +180,7 @@
     UIView *thumbnailImageView = nextView.superview;
     
     [UIView beginAnimations:nil context:thumbnailImageView];
-    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDuration:ANIMATION_DURATION];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:thumbnailImageView cache:YES];
     [UIView setAnimationDelegate:self];
@@ -190,7 +192,7 @@
 
 - (void)flipThumbViewToNextView:(UIView *)thumbnailImageView {
     [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDuration:ANIMATION_DURATION];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:thumbnailImageView cache:YES];
     thumbnailImageView.frame = self.frame;
