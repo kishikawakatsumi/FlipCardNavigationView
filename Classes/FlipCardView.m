@@ -35,31 +35,17 @@
 
 - (void)setDataSource:(id)d {
     dataSource = d;
-    if ([dataSource respondsToSelector:@selector(flipCardViewNumberOfRows:)]) {
-        flags.dataSourceNumberOfRows = YES;
-    }
-    if ([dataSource respondsToSelector:@selector(flipCardViewNumberOfColumns:)]) {
-        flags.dataSourceNumberOfColumns = YES;
-    }
-    if ([dataSource respondsToSelector:@selector(flipCardView:thumbnailViewForRow:forColumn:)]) {
-        flags.dataSourceThumbnailView = YES;
-    }
-    if ([dataSource respondsToSelector:@selector(flipCardView:fullViewForRow:forColumn:)]) {
-        flags.dataSourceFullView = YES;
-    }
+    flags.dataSourceNumberOfRows = [dataSource respondsToSelector:@selector(flipCardViewNumberOfRows:)];
+    flags.dataSourceNumberOfColumns = [dataSource respondsToSelector:@selector(flipCardViewNumberOfColumns:)];
+    flags.dataSourceThumbnailView = [dataSource respondsToSelector:@selector(flipCardView:thumbnailViewForRow:forColumn:)];
+    flags.dataSourceFullView = [dataSource respondsToSelector:@selector(flipCardView:fullViewForRow:forColumn:)];
 }
 
 - (void)setDelegate:(id)d {
     delegate = d;
-    if ([delegate respondsToSelector:@selector(flipCardView:heightForRow:)]) {
-        flags.delegateHeightForRow = YES;
-    }
-    if ([delegate respondsToSelector:@selector(flipCardView:widthForColumn:)]) {
-        flags.delegateWidthForColumn = YES;
-    }
-    if ([delegate respondsToSelector:@selector(flipCardView:didSelectThumbnailForRow:forColumn:)]) {
-        flags.delegateDidSelectThumbnail = YES;
-    }
+    flags.delegateHeightForRow = [delegate respondsToSelector:@selector(flipCardView:heightForRow:)];
+    flags.delegateWidthForColumn = [delegate respondsToSelector:@selector(flipCardView:widthForColumn:)];
+    flags.delegateDidSelectThumbnail = [delegate respondsToSelector:@selector(flipCardView:didSelectThumbnailForRow:forColumn:)];
 }
 
 - (UIEdgeInsets)contentInset {
