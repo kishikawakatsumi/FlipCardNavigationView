@@ -87,7 +87,7 @@
                     view = [dataSource flipCardView:self thumbnailViewForRow:row forColumn:column];
                 }
                 view.userInteractionEnabled = YES;
-                
+
                 CGRect rect = view.frame;
                 if (column > 0) {
                     if (flags.delegateWidthForColumn) {
@@ -107,19 +107,21 @@
                 } else {
                     rect.origin.y = 0.0f;
                 }
-                
+
                 view.frame = rect;
-                
+
                 FlipCardThumbnailButton *button = [[FlipCardThumbnailButton alloc] init];
                 button.frame = CGRectMake(0.0f, 0.0f, view.frame.size.width, view.frame.size.height);
                 button.exclusiveTouch = YES;
+                button.row = row;
+                button.column = column;
                 [button addTarget:self action:@selector(thumbnailButtonPushed:) forControlEvents:UIControlEventTouchUpInside];
-                
+
                 [thumbnailView addSubview:view];
-                
+
                 [view addSubview:button];
                 [button release];
-                
+
                 if (row == 0) {
                     width += view.frame.size.width;
                 }
@@ -140,31 +142,31 @@
 
 - (void)pushViewController:(UIViewController *)controller {
     self.nextViewController = controller;
-    
+
     UIView *selectedView = lastSelected.superview;
-    
+
     UIImageView *thumbnailImageView = [[UIImageView alloc] initWithFrame:[thumbnailView convertRect:selectedView.frame toView:self]];
-    
+
     UIGraphicsBeginImageContext(thumbnailImageView.frame.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
     [selectedView.layer renderInContext:context];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    
+
     thumbnailImageView.image = image;
     thumbnailImageView.userInteractionEnabled = YES;
     [self addSubview:thumbnailImageView];
     [thumbnailImageView release];
-    
+
     thumbFrame = thumbnailImageView.frame;
-    
+
     [self performSelector:@selector(flipThumbViewToNextView:) withObject:thumbnailImageView afterDelay:0.0];
 }
 
 - (void)popViewController {
     UIView *nextView = nextViewController.view;
     UIView *thumbnailImageView = nextView.superview;
-    
+
     [UIView beginAnimations:nil context:thumbnailImageView];
     [UIView setAnimationDuration:ANIMATION_DURATION];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
